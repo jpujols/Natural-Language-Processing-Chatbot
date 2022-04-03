@@ -1,4 +1,5 @@
 import nltk
+import time
 from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -8,6 +9,7 @@ import wikipedia
 nltk.download('averaged_perceptron_tagger')
 nltk.download('wordnet')
 nltk.download('punkt')
+
 
 text = wikipedia.page('Vegetables').content
 
@@ -41,11 +43,12 @@ def process(text, question):
 
 
 while True:
-  question = input("Hi, Listening.. ?\n")
+  question = input("Reading.. How can I help you?\n")
   output = process(text, question)
   if output:
     print(output)
+    time.sleep(3)
   elif question=='quit':
     break
   else:
-    print("I don't know.")
+    print("I'm still learning. Sorry no data found.")
