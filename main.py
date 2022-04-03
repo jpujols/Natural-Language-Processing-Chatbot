@@ -25,3 +25,13 @@ def lemma_me(sent):
 sentence_tokens = nltk.sent_tokenize(text)
 sentence_tokens.append(question)
 
+tv = TfidVectorizer(tokenizer=lemma_me)
+tf = tv.fit_transform(sentence_tokens)
+values = cosine_similarity(tf[-1], tf)
+index = values.argsort()[0][-2]
+values_flat = values.flatten()
+values_flat.sort()
+coeff = values_flat[-2]
+if coeff > 0.3:
+  print(sentence_tokens[index])
+
